@@ -2,7 +2,8 @@
 # Compiled class file
 *.class
 .idea
-.target/
+target/**
+**/application.yaml
 
 # Log file
 *.log
