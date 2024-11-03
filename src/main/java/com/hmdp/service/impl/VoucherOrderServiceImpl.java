@@ -88,18 +88,8 @@ public class VoucherOrderServiceImpl extends ServiceImpl<VoucherOrderMapper, Vou
                     createVoucherOrder(voucherOrder);
                     // 4.确认消息 XACK
                     stringRedisTemplate.opsForStream().acknowledge("stream.orders", "g1", record.getId());
-                    try {
-                        Thread.sleep(1000000);
-                    } catch (InterruptedException e) {
-                        throw new RuntimeException(e);
-                    }
                 } catch (Exception e) {
                     log.error("处理订单异常", e);
-                    try {
-                        Thread.sleep(1000000);
-                    } catch (InterruptedException e1) {
-                        throw new RuntimeException(e1);
-                    }
                     handlePendingList();
                 }
             }
